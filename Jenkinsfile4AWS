@@ -1,0 +1,15 @@
+pipeline {
+  agent any
+  parameters {
+         string(name: 'tomcat_prod', defaultValue: '35.171.167.209', description: 'AWS Production Server')
+  }
+  
+  stages {
+    stage('Deploy2AWS') {
+      steps {
+        //build job: 'P1-deploy-to-staging'
+        sh "scp -i /c/Users/Sabin/ssh-ec2-server1.pem **/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
+      }
+    }
+  }
+}
